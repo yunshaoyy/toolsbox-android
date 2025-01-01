@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            flex-direction: column;
+            height: 100%;
+            background-color: rgb(250, 250, 250);
+        }
+
+        canvas {
+            flex-grow: 1;
+        }
+
+        #functionsbar {
+            height: 30px;
+            text-align: center;
+            background-color: rgb(50, 50, 50);
+        }
+
+        a {
+            color: rgb(250, 250, 250);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="whiteboard"></canvas>
+    <div id="functionsbar">
+        <a href="javascript:void(0);" onclick='brush()'>画笔</a>
+        <a href="javascript:void(0);" onclick='eraser()'>橡皮</a>
+        <a href="javascript:void(0);" onclick='clearCanvas()'>清除</a>
+    </div>
+    <script>
+        const canvas = document.getElementById('whiteboard');
+        const ctx = canvas.getContext('2d');
+
+        let drawing = false;
+        let currentTool = 'brush';
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight - document.getElementById('functionsbar').offsetHeight;
+
+        function startDrawing(e) {
+            drawing = true;
+            draw(e);
+        }
+
+        function stopDrawing() {
+            drawing = false;
+            ctx.beginPath();
+        }
+
+        function draw(e) {
+            if (!drawing) return;
+
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+            ctx.lineWidth = currentTool === 'brush' ? 5 : 25;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = currentTool === 'brush' ? 'rgb(50,50,50)' : 'rgb(250,250,250)';
+
+            ctx.lineTo(clientX - rect.left, clientY - rect.top);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(clientX - rect.left, clientY - rect.top);
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mousemove', draw);
+
+
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            startDrawing(e);
+        });
+
+        canvas.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            stopDrawing();
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            draw(e);
+        });
+
+        function brush() {
+            currentTool = 'brush';
+        }
+
+        function eraser() {
+            currentTool = 'eraser';
+        }
+    </script>
+</body>
+
+</html>

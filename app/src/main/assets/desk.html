@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="UTF-8">
+	<style>
+		div {
+			color: rgb(250, 250, 250);
+		}
+
+		body {
+			text-align: center;
+			background-color: rgb(50, 50, 50);
+		}
+
+		a {
+			text-decoration: none;
+			color: rgb(250, 250, 250);
+		}
+
+		#toolsbar {
+			position: absolute;
+			bottom: 25%;
+			left: 0%;
+			right: 0%;
+		}
+
+		#countdown {
+			position: absolute;
+			top: 25%;
+			left: 0%;
+			right: 0%;
+		}
+	</style>
+</head>
+
+<body onload="fxianzai(),fgaokao()">
+	<div id="countdown">
+		<h3 id="xianzai1"></h3>
+		<h3 id="xianzai2"></h3>
+		<h3 id="gaokao"></h3>
+	</div>
+	<div id="toolsbar">
+		<a href="chat.html" target="_blank">聊天</a>
+		<a href="https://i7w15pvd.yichafen.com" target="_blank">查分</a>
+		<a href="whiteboard.html" target="_blank">白板</a>
+	</div>
+	<script>
+		function fxianzai() {
+			let xianzai = new Date();
+			document.getElementById("xianzai1").innerHTML = xianzai.getFullYear() + "年" + (xianzai.getMonth() + 1) + "月" + xianzai.getDate() + "日";
+			document.getElementById("xianzai2").innerHTML = xianzai.getHours() + "时" + xianzai.getMinutes() + "分" + xianzai.getSeconds() + "秒";
+		}
+		setInterval(fxianzai, 1000);
+
+		let gaokao = new Date(2025, 6 - 1, 7, 9, 0);
+		function fgaokao() {
+			let now = new Date();
+			let lgaokao = gaokao - now;
+			let gdays = Math.floor(lgaokao / (1000 * 60 * 60 * 24));
+			let ghours = Math.floor((lgaokao % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			let gminutes = Math.floor((lgaokao % (1000 * 60 * 60)) / (1000 * 60));
+			let gseconds = Math.floor((lgaokao % (1000 * 60)) / 1000);
+			document.getElementById("gaokao").innerHTML = `还有${gdays}天${ghours}时${gminutes}分${gseconds}秒高考`;
+		}
+		setInterval(fgaokao, 1000);
+	</script>
+</body>
+
+</html>
