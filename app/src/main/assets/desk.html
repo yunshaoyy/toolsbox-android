@@ -19,24 +19,25 @@
 
 		#toolsbar {
 			position: absolute;
-			bottom: 25%;
+			bottom: 10%;
 			left: 0%;
 			right: 0%;
 		}
 
 		#countdown {
 			position: absolute;
-			top: 25%;
+			top: 10%;
 			left: 0%;
 			right: 0%;
 		}
 	</style>
 </head>
 
-<body onload="fxianzai(),fgaokao()">
+<body onload="fxianzai(),fgaokao(),fhuijia()">
 	<div id="countdown">
 		<h3 id="xianzai1"></h3>
 		<h3 id="xianzai2"></h3>
+		<h3 id="huijia"></h3>
 		<h3 id="gaokao"></h3>
 	</div>
 	<div id="toolsbar">
@@ -45,6 +46,18 @@
 		<a href="whiteboard.html" target="_blank">白板</a>
 	</div>
 	<script>
+		let huijia = new Date();
+		huijia.setHours(21, 50, 0, 0);
+		function fhuijia() {
+			let now = new Date();
+			let lhuijia = huijia - now;
+			let hhours = Math.floor(lhuijia / (1000 * 60 * 60));
+			let hminutes = Math.floor((lhuijia % (1000 * 60 * 60)) / (1000 * 60));
+			let hseconds = Math.floor((lhuijia % (1000 * 60)) / 1000);
+			document.getElementById("huijia").innerHTML = `还有${hhours}时${hminutes}分${hseconds}秒回家`;
+		}
+		setInterval(fhuijia, 1000);
+
 		function fxianzai() {
 			let xianzai = new Date();
 			document.getElementById("xianzai1").innerHTML = xianzai.getFullYear() + "年" + (xianzai.getMonth() + 1) + "月" + xianzai.getDate() + "日";
