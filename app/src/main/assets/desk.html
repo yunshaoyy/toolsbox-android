@@ -41,11 +41,16 @@
 		<h3 id="gaokao"></h3>
 	</div>
 	<div id="toolsbar">
+		<a href="javascript:void(0)" onclick="launchActivity()">桌面</a>
 		<a href="chat.html" target="_blank">聊天</a>
 		<a href="https://i7w15pvd.yichafen.com" target="_blank">查分</a>
 		<a href="whiteboard.html" target="_blank">白板</a>
 	</div>
 	<script>
+		function launchActivity() {
+			// 调用 Android 的接口方法
+			Android.launchActivity();
+		}
 		let huijia = new Date();
 		huijia.setHours(21, 50, 0, 0);
 		function fhuijia() {
