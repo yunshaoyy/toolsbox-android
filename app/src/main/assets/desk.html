@@ -17,9 +17,16 @@
 			color: rgb(250, 250, 250);
 		}
 
-		#toolsbar {
+		#centertoolsbar {
 			position: absolute;
 			bottom: 10%;
+			left: 0%;
+			right: 0%;
+		}
+
+		#toptoolsbar {
+			position: absolute;
+			top: 0%;
 			left: 0%;
 			right: 0%;
 		}
@@ -34,17 +41,17 @@
 </head>
 
 <body onload="fxianzai(),fgaokao(),fhuijia()">
+	<div id="toptoolsbar">
+		<a href="tools.html" target="_blank">工具</a>
+	</div>
 	<div id="countdown">
 		<h3 id="xianzai1"></h3>
 		<h3 id="xianzai2"></h3>
 		<h3 id="huijia"></h3>
 		<h3 id="gaokao"></h3>
 	</div>
-	<div id="toolsbar">
+	<div id="centertoolsbar">
 		<a href="javascript:void(0)" onclick="launchActivity()">桌面</a>
-		<a href="chat.html" target="_blank">聊天</a>
-		<a href="https://i7w15pvd.yichafen.com" target="_blank">查分</a>
-		<a href="whiteboard.html" target="_blank">白板</a>
 	</div>
 	<script>
 		function launchActivity() {
