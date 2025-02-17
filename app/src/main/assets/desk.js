@@ -14,9 +14,10 @@ function launchActivity() {
     Android.launchActivity();
 }
 
-let huijia = new Date();
-huijia.setHours(21, 50, 0, 0);
+
 function fhuijia() {
+    let huijia = new Date();
+    huijia.setHours(22, 20, 0, 0);
     let now = new Date();
     let lhuijia = huijia - now;
     let hhours = Math.floor(lhuijia / (1000 * 60 * 60));
