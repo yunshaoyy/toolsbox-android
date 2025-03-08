@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background-color: rgb(50, 50, 50);
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            color: rgb(250, 250, 250);
+        }
+
+        p {
+            color: rgb(250, 250, 250);
+        }
+
+        #input {
+            width: 250px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <p>聊天</p>
+    <input type="text" id="input">
+    <p id="response"></p>
+    <div>
+        <a href="javascript:void(0);" onclick="cleartext()">清除</a>
+        <a href="javascript:void(0);" onclick="sendtext()">发送</a>
+    </div>
+
+    <script>
+        function cleartext() {
+            document.getElementById('response').innerText = "";
+        }
+
+        async function sendtext() {
+            const content = document.getElementById('input').value.trim();
+            let responseText = '';
+
+            if (!content) {
+                return;
+            }
+
+            if (content.includes("你是谁")) {
+                responseText = '我是谁';
+            }
+            else if (content.includes("我是谁")) {
+                responseText = '你是谁';
+            }
+            else {
+                const response = await fetch("https://v2.xxapi.cn/api/turing?msg=" + content);
+                const data = await response.json();
+                responseText = data.data;
+            }
+
+            document.getElementById('response').innerText = responseText;
+
+            //clear
+            document.getElementById('input').value = '';
+        }
+    </script>
+</body>
+
+</html>
