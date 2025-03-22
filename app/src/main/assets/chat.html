@@ -5,17 +5,17 @@
     <meta charset="UTF-8">
     <style>
         body {
-            background-color: rgb(50, 50, 50);
+            background-color: black;
             text-align: center;
         }
 
         a {
             text-decoration: none;
-            color: rgb(250, 250, 250);
+            color: white;
         }
 
         p {
-            color: rgb(250, 250, 250);
+            color: white;
         }
 
         #input {
@@ -47,11 +47,11 @@
                 return;
             }
 
-            if (content.includes("你是谁")) {
-                responseText = '我是谁';
+            if (content.includes("嘻嘻")) {
+                responseText = '嘻嘻';
             }
-            else if (content.includes("我是谁")) {
-                responseText = '你是谁';
+            else if (content.includes("嘿嘿")) {
+                responseText = '嘿嘿';
             }
             else {
                 const response = await fetch("https://v2.xxapi.cn/api/turing?msg=" + content);
